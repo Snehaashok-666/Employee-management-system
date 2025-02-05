@@ -1,0 +1,74 @@
+{% extends 'Adminfiles/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="title">Confirm Delete</h2>
+    <p class="message">Are you sure you want to delete the leave record for "<strong>{{ leave.leave_type }}</strong>"?</p>
+
+    <form method="post" class="form-container">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'leave_management' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<style>
+    .container {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #f8d7da;
+        border: 1px solid #f5c6cb;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .title {
+        color: #721c24;
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .message {
+        font-size: 16px;
+        color: #721c24;
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+    }
+
+    .btn-danger {
+        background: #dc3545;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background: #b02a37;
+    }
+
+    .btn-secondary {
+        background: #6c757d;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background: #545b62;
+    }
+</style>
+{% endblock %}

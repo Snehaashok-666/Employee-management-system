@@ -1,0 +1,35 @@
+{% extends 'Adminfiles/base.html' %}
+{% block content %}
+    <div class="container">
+        <h2>Add Attendance Report</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label>Employee:</label>
+            <select name="employee" class="form-control">
+                <option value="">Select Employee</option>
+                {% for emp in employees %}
+                    <option value="{{ emp.id }}">{{ emp.first_name }} {{ emp.last_name }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Start Date:</label>
+            <input type="date" name="start_date" required class="form-control">
+
+            <label>End Date:</label>
+            <input type="date" name="end_date" required class="form-control">
+
+            <label>Total Days:</label>
+            <input type="number" name="total_days" required class="form-control">
+
+            <label>Present Days:</label>
+            <input type="number" name="present_days" required class="form-control">
+
+            <label>Absent Days:</label>
+            <input type="number" name="absent_days" required class="form-control">
+
+            <br>
+            <button type="submit" class="btn btn-success">Add Report</button>
+            <a href="{% url 'attendance_report' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

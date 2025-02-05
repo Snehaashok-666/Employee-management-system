@@ -1,0 +1,141 @@
+{% extends 'Adminfiles/base.html' %}
+
+{% block content %}
+<style>
+    .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #2d3748;
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    form {
+        display: grid;
+        gap: 1.2rem;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-weight: 500;
+        color: #4a5568;
+        margin-bottom: 0.4rem;
+        display: block;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #4299e1;
+        box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+        outline: none;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-primary {
+        background-color: #4299e1;
+        border: none;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #3182ce;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-secondary {
+        background-color: #e2e8f0;
+        border: none;
+        color: #2d3748;
+    }
+
+    .btn-secondary:hover {
+        background-color: #cbd5e0;
+        transform: translateY(-1px);
+    }
+
+    .button-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+        flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 1.5rem;
+            margin: 1rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+        }
+
+        .form-control {
+            padding: 0.65rem 0.9rem;
+        }
+
+        .button-group {
+            flex-direction: column;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="container">
+    <h2>Update Department</h2>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_name">Department Name:</label>
+            <input type="text" name="name" value="{{ department.name }}" required class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="id_description">Description:</label>
+            <textarea name="description" class="form-control" required>{{ department.description }}</textarea>
+        </div>
+
+        
+
+        <div class="button-group">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="{% url 'admindept' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

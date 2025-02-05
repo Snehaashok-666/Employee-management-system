@@ -1,0 +1,247 @@
+{% extends 'Adminfiles/base.html' %}
+
+{% block content %}
+<h2>Employee Summary</h2>
+
+<!-- Search and Sort Form -->
+<form method="GET" action="" class="mb-3">
+    <input type="text" name="search" placeholder="Search employees..." value="{{ request.GET.search }}">
+    <select name="department" onchange="this.form.submit()">
+        <option value="">All Departments</option>
+        {% for dept in departments %}
+        <option value="{{ dept.id }}" {% if request.GET.department == dept.id|stringformat:"s" %}selected{% endif %}>{{ dept.name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+<a href="{% url 'employee_add' %}" class="btn btn-primary mb-3">➕ Add Employee</a>
+
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>SN</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Department</th>
+            
+            <th>Designation</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ employee.first_name }}</td>
+            <td>{{ employee.last_name }}</td>
+            <td>{{ employee.email }}</td>
+            <td>{{ employee.phone_number }}</td>
+            <td>{{ employee.department }}</td>
+            
+            <td>{{ employee.designation }}</td>
+            <td>
+                <span><a href="{% url 'employee_update' employee.pk %}" class="edit-icon">✏️</a></span>
+                <span><a href="{% url 'employee_delete' employee.pk %}" class="delete-icon">🗑️</a></span>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+<style>
+    /* General Styles */
+    h2 {
+        font-size: 28px;
+        color: #494d51;
+        margin-bottom: 20px;
+    }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 16px;
+        text-align: left;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .styled-table thead {
+        background-color: #494d51;
+        color: white;
+    }
+
+    .styled-table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .styled-table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .edit-icon, .delete-icon {
+        cursor: pointer;
+        font-size: 18px;
+        transition: 0.3s ease;
+        margin-right: 10px;
+    }
+
+    .edit-icon {
+        color: #007bff;
+    }
+
+    .edit-icon:hover {
+        color: #0056b3;
+    }
+
+    .delete-icon {
+        color: #dc3545;
+    }
+
+    .delete-icon:hover {
+        color: #a71d2a;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #494d51;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #373a3d;
+        transform: translateY(-1px);
+    }
+
+    /* Search and Sort Form Styling */
+    form.mb-3 {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    input[name="search"] {
+        flex: 1;
+        padding: 10px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 25px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        max-width: 400px;
+    }
+
+    input[name="search"]:focus {
+        outline: none;
+        border-color: #494d51;
+        box-shadow: 0 0 8px rgba(73, 77, 81, 0.2);
+    }
+
+    select[name="department"] {
+        padding: 10px 35px 10px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 25px;
+        font-size: 16px;
+        appearance: none;
+        background-color: white;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23494d51' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 18px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    select[name="department"]:hover {
+        border-color: #c0c0c0;
+    }
+
+    select[name="department"]:focus {
+        outline: none;
+        border-color: #494d51;
+        box-shadow: 0 0 8px rgba(73, 77, 81, 0.2);
+    }
+
+    form.mb-3 button[type="submit"] {
+        padding: 10px 25px;
+        background-color: #494d51;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    form.mb-3 button[type="submit"]:hover {
+        background-color: #373a3d;
+        transform: translateY(-1px);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 24px;
+        }
+
+        form.mb-3 {
+            flex-wrap: wrap;
+        }
+
+        input[name="search"],
+        select[name="department"] {
+            width: 100%;
+            max-width: none;
+            margin-bottom: 10px;
+        }
+
+        .styled-table {
+            font-size: 14px;
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 10px;
+        }
+
+        .btn {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .styled-table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .styled-table th, .styled-table td {
+            min-width: 120px;
+        }
+    }
+</style>
+
+
+
+    
+{% endblock content %}
+    

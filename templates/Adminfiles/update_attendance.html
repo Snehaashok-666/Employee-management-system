@@ -1,0 +1,31 @@
+{% extends 'Adminfiles/base.html' %}
+{% block content %}
+    <div class="container">
+        <h2>Update Attendance</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label>Employee:</label>
+            <select name="employee" class="form-control">
+                {% for emp in employees %}
+                    <option value="{{ emp.id }}" {% if emp.id == attendance.employee.id %}selected{% endif %}>
+                        {{ emp.first_name }} {{ emp.last_name }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <label>Date:</label>
+            <input type="date" name="date" value="{{ attendance.date|date:'Y-m-d' }}" required class="form-control">
+
+            <label>Status:</label>
+            <select name="status" class="form-control">
+                <option value="Present" {% if attendance.status == "Present" %}selected{% endif %}>Present</option>
+                <option value="Absent" {% if attendance.status == "Absent" %}selected{% endif %}>Absent</option>
+                <option value="Leave" {% if attendance.status == "Leave" %}selected{% endif %}>Leave</option>
+            </select>
+
+            <br>
+            <button type="submit" class="btn btn-primary">Update Attendance</button>
+            <a href="{% url 'attendance_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

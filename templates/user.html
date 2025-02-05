@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Employee Management System</h1>
+        <img src="https://th.bing.com/th/id/OIP.bUKzfrFO_BXieU2jxNUCyQHaEc?w=2000&h=1200&rs=1&pid=ImgDetMain" alt="Company Logo" class="logo">
+        <div class="users">
+            <button><a href="{% url 'adminsignin' %}">Admin</a></button>
+           
+        </div>
+    </div>
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            padding: 50px;
+            width: 500px;
+            background-color: rgba(244, 244, 243, 0.918);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .users {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+            width: 120px;
+            height: 50px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            height: 100%;
+            width: 100%;
+            line-height: 50px;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,92 @@
+{% extends 'Adminfiles/base.html' %}
+
+{% block content %}
+<h2 class="heading">Add Leave</h2>
+<div class="container">
+    <form method="post" class="leave-form">
+        {% csrf_token %}
+        
+        <label for="leave_type">Leave Type:</label>
+        <input type="text" id="leave_type" name="leave_type" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+        </select>
+
+        <button type="submit">Add Leave</button>
+    </form>
+    <a href="{% url 'leave_management' %}" class="back-link">Back to Leave Management</a>
+</div>
+
+<style>
+    .container {
+        max-width: 500px;
+        margin: auto;
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .heading {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+    
+    .leave-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    textarea {
+        height: 100px;
+        resize: none;
+    }
+
+    button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 15px;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}

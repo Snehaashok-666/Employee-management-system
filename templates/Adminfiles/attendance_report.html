@@ -1,0 +1,113 @@
+{% extends 'Adminfiles/base.html' %}
+
+{% block content %}
+<h2>Attendance Report</h2>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>SN</th>
+            <th>Employee</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Total Days</th>
+            <th>Present Days</th>
+            <th>Absent Days</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for report in attendance_reports %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ report.employee.first_name }} {{ report.employee.last_name }}</td>
+            <td>{{ report.start_date }}</td>
+            <td>{{ report.end_date }}</td>
+            <td>{{ report.total_days }}</td>
+            <td>{{ report.present_days }}</td>
+            <td>{{ report.absent_days }}</td>
+            <td>
+                <span><a href="{% url 'attendance_report_update' report.pk %}" class="edit-icon">✏️</a></span>
+                <span><a href="{% url 'attendance_report_delete' report.pk %}" class="delete-icon">🗑️</a></span>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="8">No attendance records found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'attendance_report_add' %}" class="btn btn-primary mb-3">➕ Add Report</a>
+
+<style>
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 18px;
+        text-align: left;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .styled-table th, .styled-table td {
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+
+    .styled-table thead {
+        background-color: #373a3c;
+        color: white;
+    }
+
+    .styled-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .styled-table tr:hover {
+        background-color: #ddd;
+    }
+
+    .edit-icon {
+        cursor: pointer;
+        color: #f1c40f;
+        font-size: 18px;
+        transition: 0.3s ease;
+        margin-right: 10px;
+    }
+
+    .edit-icon:hover {
+        color: #e67e22;
+    }
+
+    .delete-icon {
+        cursor: pointer;
+        color: red;
+        font-size: 18px;
+        transition: 0.3s ease;
+    }
+
+    .delete-icon:hover {
+        color: darkred;
+    }
+
+    @media screen and (max-width: 768px) {
+        .styled-table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 8px;
+            font-size: 13px;
+        }
+
+        .edit-icon, .delete-icon {
+            font-size: 14px;
+        }
+    }
+</style>
+{% endblock %}

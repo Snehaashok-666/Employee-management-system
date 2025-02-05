@@ -1,0 +1,104 @@
+{% extends 'Adminfiles/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="title">Update Leave</h2>
+
+    <form method="post" class="form-container">
+        {% csrf_token %}
+        
+        <label class="form-label" for="leave_type">Leave Type:</label>
+        <input type="text" id="leave_type" name="leave_type" value="{{ leave.leave_type }}" required class="form-input">
+
+        <label class="form-label" for="description">Description:</label>
+        <textarea id="description" name="description" required class="form-textarea">{{ leave.description }}</textarea>
+
+        <label class="form-label" for="status">Status:</label>
+        <select id="status" name="status" class="form-select">
+            <option value="Active" {% if leave.status == "Active" %}selected{% endif %}>Active</option>
+            <option value="Inactive" {% if leave.status == "Inactive" %}selected{% endif %}>Inactive</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary">Update Leave</button>
+        
+    </form>
+    <a href="{% url 'leave_management' %}" class="btn btn-secondary">Close</a>
+</div>
+
+<style>
+    .container {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+        text-align: center;
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-label {
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 10px;
+        color: #495057;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .form-textarea {
+        height: 100px;
+        resize: none;
+    }
+
+    .btn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+    }
+
+    .btn-primary {
+        background: #007bff;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: #0056b3;
+    }
+
+    .btn-secondary {
+        background: #6c757d;
+        color: white;
+        margin-left: 10px;
+    }
+
+    .btn-secondary:hover {
+        background: #545b62;
+    }
+</style>
+{% endblock %}
