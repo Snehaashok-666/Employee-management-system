@@ -66,5 +66,5 @@ python manage.py collectstatic
 
 ---
 
-Now your Django project should be up and running! 🚀 Let me know if you need help!
+Now your Django project should be up and running! 🚀
 
